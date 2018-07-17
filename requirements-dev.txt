@@ -1,0 +1,7 @@
+# Production requirements.
+-r requirements.txt
+
+# Development requirements.
+flake8
+pylint
+coverage
