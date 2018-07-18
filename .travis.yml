@@ -1,0 +1,12 @@
+language: python
+sudo: false
+
+install:
+  - pip install -r requirements-dev.txt
+  - pip install -e .
+
+script:
+  - make prcheck
+
+after_success:
+  - codecov
