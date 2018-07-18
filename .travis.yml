@@ -9,4 +9,4 @@ script:
   - make prcheck
 
 after_success:
-  - codecov
+  - codecov --token "${!codecov-token}"
