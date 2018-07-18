@@ -8,19 +8,21 @@ NAME := $(CURRENT_DIR)
 # Files.
 TESTS=tests/unit tests/functional
 
-.requirements:
-	@pip3 install --requirement requirements-dev.txt 1>/dev/null
+requirements:
+	pip3 install --requirement requirements-dev.txt 1>/dev/null
 
-check: .requirements
+-include requirements
+
+check:
 	flake8 --max-complexity 10 $(NAME)
 	flake8 $(TESTS) tests/integration
 	pydocstyle $(NAME)
 
-pylint: .requirements
+pylint:
 	pylint --rcfile .pylintrc $(NAME)
 	pylint tests/
 
-typecheck: .requirements
+typecheck:
 	mypy $(NAME)
 
 tests:
@@ -40,3 +42,7 @@ doccheck:
 	$(MAKE) -C docs html
 
 prcheck: check pylint coverage doccheck typecheck
+
+cleanup:
+	@rm -rf .coverage
+	@rm -rf .pytest_cache
